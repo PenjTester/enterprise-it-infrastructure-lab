@@ -29,6 +29,9 @@ Successfully configure a Windows 10 client to:
 | Network Adapter | Internal Network (“lab-network”) |
 | Adapter Type | Intel PRO/1000 MT Desktop (82540EM) |
 
+
+ *Screenshot — VirtualBox network adapter configuration showing LAB-CLIENT01 connected to the Internal Network (“lab-network”), using the Intel PRO/1000 MT Desktop adapter*
+
 <img width="854" height="530" alt="Screenshot 2025-11-19 140604" src="https://github.com/user-attachments/assets/33ac2682-4e12-4b6c-82a7-6d290d68270f" />
 
 ---
@@ -37,6 +40,8 @@ Successfully configure a Windows 10 client to:
 
 Windows 10 installed successfully. Reached default desktop and performed basic system setup.
 
+ *Screenshot — Windows 10 installation successfully completed, showing default desktop environment after OS setup*
+ 
 <img width="1627" height="1065" alt="Screenshot 2025-11-19 143238" src="https://github.com/user-attachments/assets/960b30f5-4fed-466f-97eb-1353b615ef7f" />
 
 ---
@@ -64,6 +69,8 @@ To enable domain communication, I manually set:
 | Preferred DNS | 10.0.2.10 (DC) |
 | Alternate DNS | not set |
 
+ *Screenshot — IPv4 static IP configuration on LAB-CLIENT01, showing manually assigned IP (10.0.2.11), gateway, and DNS set to the Domain Controller (10.0.2.10)*
+
 <img width="399" height="457" alt="image" src="https://github.com/user-attachments/assets/7ed2b49c-d14d-4c0f-b125-0589f15a09c5" />
 
 ---
@@ -81,7 +88,9 @@ Commands executed from Command Prompt:
 - `lab.local` resolves to 10.0.2.10
 - nslookup confirms DNS is resolving via DC
 
-<img width="535" height="568" alt="Screenshot 2025-11-19 184716" src="https://github.com/user-attachments/assets/da15c449-ef04-4540-a08f-7fade5693711" />
+ *Screenshot — Command Prompt showing successful connectivity and DNS verification: ping to Domain Controller (10.0.2.10), ping lab.local, forward and reverse nslookup resolving through lab-dc01.lab.local*
+
+<img width="656" height="721" alt="image" src="https://github.com/user-attachments/assets/3c6e398a-bc5a-4a17-a06d-ee94a5768fb8" />
 
 ---
 
@@ -101,6 +110,8 @@ When prompted for credentials, I used:
 
 Received confirmation:
 
+ *Screenshot — Successful domain join confirmation dialog: “Welcome to the lab.local domain.”*
+
 <img width="261" height="148" alt="Screenshot 2025-11-19 154434" src="https://github.com/user-attachments/assets/865bffca-74ff-4968-847a-6e0af5b01fe1" />
 
 ---
@@ -112,11 +123,15 @@ On reboot, the login screen now displayed domain authentication options:
 - LAB\Administrator  
 - Other User (LAB domain context)
 
+ *Screenshot — Login screen after restart, showing domain authentication enabled via LAB\Administrator and Other User (domain context)*
+
 <img width="1623" height="1150" alt="image" src="https://github.com/user-attachments/assets/2eb8e8ce-a3fc-4436-83f1-0eb0ad00b6e8" />
 
 After logging in using domain credentials, I confirmed domain identity via:
 
 **Control Panel → System Properties → Computer Name tab**
+
+ *Screenshot — System Properties confirming LAB-CLIENT01 is joined to lab.local domain, displaying full computer name and domain membership*
 
 <img width="410" height="464" alt="Screenshot 2025-11-19 155248" src="https://github.com/user-attachments/assets/943d7a31-0b08-40b4-a3e5-85048bb20584" />
 
