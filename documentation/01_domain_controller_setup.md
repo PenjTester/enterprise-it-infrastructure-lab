@@ -25,7 +25,7 @@ Before installing Windows Server 2019, I configured the VM with essential system
 | Setting          | Value |
 |------------------|-------|
 | OS Type          | Windows Server 2019 (GUI) |
-| RAM              | 2.5 GB |
+| RAM              | 3 GB |
 | CPU Cores        | 2 vCPU |
 | Disk             | 60 GB (VDI) |
 | Network Adapter  | Internal Network (`lab-network`) |
@@ -34,7 +34,7 @@ Before installing Windows Server 2019, I configured the VM with essential system
 
  *Screenshot — VirtualBox VM Summary*  
 
-<img width="1126" height="841" alt="Screenshot 2025-11-20 132823" src="https://github.com/user-attachments/assets/6a4d6c26-c866-49a0-8315-52df60f0a90e" />
+<img width="802" height="844" alt="image" src="https://github.com/user-attachments/assets/c26abde5-52d0-4b1b-ad6b-db396d44f1fb" />
 
  *Screenshot — VirtualBox Network Adapter Configuration*  
 
