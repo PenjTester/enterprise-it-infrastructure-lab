@@ -83,7 +83,7 @@ Protection was re-enabled once final placement was complete.
 
 ---
 
-## 📝 Note on Object Protection
+##  Note on Object Protection
 
 Some OUs could not be moved initially due to **Protect object from accidental deletion** being enabled.  
 Protection was temporarily disabled to allow nesting and re-enabled after structure was finalized.
@@ -101,7 +101,7 @@ Protection was temporarily disabled to allow nesting and re-enabled after struct
 
 ---
 
-### ⏭ Next Step
+###  Next Step
 
 Begin creating domain user accounts within their appropriate departmental OUs.
 
