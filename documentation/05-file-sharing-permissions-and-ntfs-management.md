@@ -91,13 +91,14 @@ We tested expected access results using a real user, *Michael Lee (GG-Sales)*.
 ### Expected Results:
 | Folder | Access Expected |
 |--------|------------------|
-| HR | ❌ Denied |
-| Sales | ✔ Allowed (Modify) |
-| Management | ❌ Denied |
-| IT-Support | ❌ Denied |
+| HR |  Denied |
+| Sales |  Allowed (Modify) |
+| Management |  Denied |
+| IT-Support |  Denied |
 
-### Screenshot — Effective Access for MLee on Sales  
-📸 *Screenshot: Effective Access results for MLee on Sales — Modify allowed*
+ *Screenshot: Effective Access results for MLee on Sales — Modify allowed*
+
+<img width="854" height="911" alt="image" src="https://github.com/user-attachments/assets/b04c777b-67c2-41d2-8dcc-96d2544ddcfa" />
 
 ---
 
@@ -114,11 +115,14 @@ Using real user accounts, we tested access from the **client workstation** to co
 
 ---
 
-### Screenshot — Successful access (Sales user entering Sales folder)  
-📸 *Screenshot: Sales folder opened successfully from LabClient01 (MLee)*
+ *Screenshot: Sales folder opened successfully from LabClient01 (MLee)*
 
-### Screenshot — Access denied (Sales user trying to open Management folder)  
-📸 *Screenshot: Access denied popup when attempting to open Management*
+<img width="1127" height="460" alt="Screenshot 2025-11-26 142415" src="https://github.com/user-attachments/assets/c119694a-0d21-4faa-8e95-c06a3faafc37" />
+
+ *Screenshot: Access denied popup when attempting to open Management*
+ 
+ <img width="1127" height="630" alt="Screenshot 2025-11-26 142446" src="https://github.com/user-attachments/assets/b76edbaa-e020-4c36-83c6-ea6b3afca5db" />
+
 
 ---
 
@@ -137,11 +141,11 @@ Using real user accounts, we tested access from the **client workstation** to co
 
 ## Final Outcome
 
-🔐 Centralized, secure file access is now correctly enforced using:
+ Centralized, secure file access is now correctly enforced using:
 - Active Directory Security Groups
 - NTFS and Share Permissions
 - Validated access via domain logons from client machine
 
-➡ **Next Milestone: DHCP Configuration & Dynamic IP Assignment**
+ **Next Milestone: DHCP Configuration & Dynamic IP Assignment**
 
 ---
