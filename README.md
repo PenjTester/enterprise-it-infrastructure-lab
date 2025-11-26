@@ -26,8 +26,8 @@ The goal is to demonstrate practical skills in **Active Directory, DNS, user man
 | 01 – Domain Controller Setup | ✔️ Completed | `/documentation/01-domain-controller-setup.md` |
 | 02 – Windows Client Domain Join | ✔️ Completed | `/documentation/02-client-domain-join.md` |
 | 03 – Active Directory Identity Management | ✔️ Completed | `/documentation/03-active-directory-identity-management.md` |
-| 04 – Group Management & Access Control | Upcoming | Coming soon |
-| 05 – File Sharing, Permissions, and NTFS Management | Upcoming | Coming soon |
+| 04 – Group Management & Access Control | ✔️ Completed | `documentation/04-group-management-and-access-control.md` |
+| 05 – File Sharing, Permissions, and NTFS Management | ✔️ Completed | `documentation/05-file-sharing-permissions-and-ntfs-management.md`
 | 06 – DHCP Configuration & Dynamic IP Assignment | Upcoming | Coming soon |
 
 ---
@@ -40,7 +40,9 @@ The goal is to demonstrate practical skills in **Active Directory, DNS, user man
 - Create domain users and apply login/password policy  
 - Validate domain identity via command-line tools (`whoami`, `nslookup`, `systeminfo`)  
 - Document each task clearly using screenshots, explanations, and configuration evidence  
-- Build a portfolio-ready GitHub-based lab environment  
+- Build a portfolio-ready GitHub-based lab environment
+- Configure NTFS and Share Permissions for secure departmental access
+- Validate access using Effective Access and client-side testing  
 
 ---
 
@@ -53,6 +55,7 @@ The goal is to demonstrate practical skills in **Active Directory, DNS, user man
 - Apply Group Policy Objects (GPO) to enforce system-wide settings
 - Demonstrate troubleshooting, documentation, and validation accuracy
 - Present work professionally through structured GitHub documentation
+- Implement centralized file access using AD Security Groups and NTFS Share permissions
 
 ---
 
@@ -68,8 +71,10 @@ The goal is to demonstrate practical skills in **Active Directory, DNS, user man
 | Domain users created in departmental OUs | ✔️ |
 | Domain login and identity validation confirmed via client | ✔️ |
 | Documentation stored and structured in GitHub | ✔️ |
+| Folder access enforced using NTFS and Share Permissions | ✔️ |
+| Verified access restrictions via client workstation | ✔️ |
 
-**Next:** Create security groups, assign users by role/department, and implement access control (Milestone 04)
+**Next:** Configure DHCP for dynamic IP assignment, validate scope options, and test client address leasing (Milestone 06)
 
 ---
 
