@@ -31,6 +31,8 @@ On **LAB-DC01**, four department folders were created in `C:\Shared`:
 | C:\Shared\Management | Management files & documents |
 | C:\Shared\IT-Support | IT department files |
 
+(Root C:\Shared was created as the base location for centralized departmental folders)
+
 *Screenshot — Departmental folders (HR, IT-Support, Management, Sales) visible in \\LAB-DC01\Shared from a domain-joined client*
 
 <img width="1124" height="420" alt="image" src="https://github.com/user-attachments/assets/e446b82c-b326-45e2-ac4e-3411f3cbd060" />
@@ -74,7 +76,7 @@ Share permissions were intentionally set to **Read-only** for all department sec
 **Key Notes:**
 - Share permissions are permissive (Read), while NTFS controls real access.
 - Prevents accidental permission escalation using only Share-level settings.
-- This design follows best practice: **“Share wide, secure with NTFS.”**
+- This design follows best practice: **“Share wide. Secure with NTFS.”**
 
 *Screenshot — Share Permissions for Shared (Top-Level Folder)*
 
@@ -99,6 +101,8 @@ We tested expected access results using a real user, *Michael Lee (GG-Sales)*.
  *Screenshot: Effective Access results for MLee on Sales — Modify allowed*
 
 <img width="854" height="911" alt="image" src="https://github.com/user-attachments/assets/b04c777b-67c2-41d2-8dcc-96d2544ddcfa" />
+
+>  **Note:** Even though **Modify** is not explicitly shown as a single line in the Effective Access results, it is effectively granted because **Read**, **Write**, and **Execute** permissions are all allowed — which together make up the Modify permission level.
 
 ---
 
