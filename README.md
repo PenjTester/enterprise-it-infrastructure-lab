@@ -1,98 +1,70 @@
-# Enterprise IT Infrastructure Lab (Virtualized)
+# Enterprise IT Lab (VirtualBox)
 
-This repository documents the design and implementation of a Windows-based **virtual enterprise network**, built for hands-on experience with real-world IT administration, identity management, and networking concepts.
+This repository contains a small virtual enterprise environment built in Oracle VirtualBox.  
+The goal is to set up a realistic Windows domain with a domain controller, DNS, DHCP, Active Directory structure, and a Windows 10 client. Each milestone focuses on a common administrative task, with step-by-step documentation and screenshots stored in the `documentation/` folder.
 
-The goal is to demonstrate practical skills in **Active Directory, DNS, user management, security groups, domain authentication, and enterprise networking** — illustrating not just theoretical knowledge, but actual application and problem-solving.
+This project is meant to be practical: build the environment, configure the services, and verify that everything works. The documentation reflects what was done, why it was done, and how it behaves.
 
 ---
 
-##  Lab Overview
+## Lab Environment
 
 | Component | Details |
-|-----------|---------|
-| Virtualization Platform | Oracle VirtualBox (Type 2 Hypervisor) |
+|----------|---------|
+| Virtualization | Oracle VirtualBox |
 | Domain Name | `lab.local` |
-| Server OS | Windows Server 2019 (Domain Controller / DNS) |
-| Client OS | Windows 10 Pro (Domain-joined workstation) |
+| Server | Windows Server 2019 (Domain Controller / DNS / DHCP) |
+| Workstation | Windows 10 Pro (Domain-joined client) |
 | Network Mode | Internal Network (`lab-network`) |
-| Lab Purpose | Simulate enterprise IT identity and access infrastructure with documentation as portfolio evidence |
+
+The lab runs fully isolated inside VirtualBox and is used for practicing common enterprise administration skills.
 
 ---
 
-##  Milestone Documentation
+## Milestones
+
+Each milestone has its own detailed documentation file under `/documentation/`.
 
 | Milestone | Status | Documentation |
-|-----------|--------|---------------|
-| 01 – Domain Controller Setup | ✔️ Completed | `/documentation/01-domain-controller-setup.md` |
-| 02 – Windows Client Domain Join | ✔️ Completed | `/documentation/02-client-domain-join.md` |
-| 03 – Active Directory Identity Management | ✔️ Completed | `/documentation/03-active-directory-identity-management.md` |
-| 04 – Group Management & Access Control | ✔️ Completed | `/documentation/04-group-management-and-access-control.md` |
-| 05 – File Sharing, Permissions, and NTFS Management | ✔️ Completed | `/documentation/05-file-sharing-permissions-and-ntfs-management.md`
-| 06 – DHCP Configuration & Dynamic IP Assignment | Upcoming | Coming soon |
+|----------|--------|---------------|
+| 01 – Domain Controller Setup |  Completed | `/documentation/01-domain-controller-setup.md` |
+| 02 – Client Domain Join |  Completed | `/documentation/02-client-domain-join.md` |
+| 03 – Active Directory Identity Management |  Completed | `/documentation/03-active-directory-identity-management.md` |
+| 04 – Group & Access Control |  Completed | `/documentation/04-group-management-and-access-control.md` |
+| 05 – File Sharing & NTFS Permissions |  Completed | `/documentation/05-file-sharing-permissions-and-ntfs-management.md` |
+| 06 – DHCP Configuration (Dynamic IP Assignment) |  Completed | `/documentation/06-dhcp-configuration-dynamic-ip-assignment.md` |
+| 07 – DNS Management & Domain Service Reliability |  Completed | `/documentation/07-dns-management-and-domain-service-reliability.md` |
+| 08 – Group Policy Configuration & Workstation Management |  Upcoming | *(coming soon)* |
 
 ---
 
-##  Skills Demonstrated
+## What This Project Covers
 
-- Configure Active Directory Domain Services (AD DS) and DNS  
-- Join client machines to a domain and authenticate using AD credentials  
-- Design and implement AD Organizational Unit (OU) structure  
-- Create domain users and apply login/password policy  
-- Validate domain identity via command-line tools (`whoami`, `nslookup`, `systeminfo`)  
-- Document each task clearly using screenshots, explanations, and configuration evidence  
-- Build a portfolio-ready GitHub-based lab environment
-- Configure NTFS and Share Permissions for secure departmental access
-- Validate access using Effective Access and client-side testing  
+- Installing and configuring a Windows Server domain controller  
+- AD DS, DNS, and DHCP setup  
+- Joining Windows clients to the domain  
+- Creating an OU structure  
+- Managing users, groups, and permissions  
+- NTFS and share permissions  
+- DNS forward lookup, reverse lookup, SRV records, and scavenging  
+- DHCP scopes, leases, and dynamic registration  
+- Troubleshooting using built-in tools (`ipconfig`, `nslookup`, `whoami`, etc.)  
+- Documenting each administrative task with screenshots  
+- Keeping configuration changes organized by milestone
 
----
-
-##  Project Objectives
-
-- Build a virtualized, enterprise-style IT infrastructure
-- Practice user, group, and Organizational Unit (OU) management
-- Configure DNS and domain-based name resolution
-- Join Windows clients to a domain and enable centralized authentication
-- Apply Group Policy Objects (GPO) to enforce system-wide settings
-- Demonstrate troubleshooting, documentation, and validation accuracy
-- Present work professionally through structured GitHub documentation
-- Implement centralized file access using AD Security Groups and NTFS Share permissions
+The documentation folder contains the full walkthroughs.
 
 ---
 
-##  Current Status
+## Next Steps
 
-| Status Item | Completion |
-|-------------|------------|
-| Domain Controller built and operational | ✔️ |
-| Active Directory domain `lab.local` established | ✔️ |
-| Client (Windows 10) successfully joined to domain | ✔️ |
-| DNS fully resolving internal hostnames | ✔️ |
-| Organizational Units (OUs) created with proper hierarchy | ✔️ |
-| Domain users created in departmental OUs | ✔️ |
-| Domain login and identity validation confirmed via client | ✔️ |
-| Documentation stored and structured in GitHub | ✔️ |
-| Folder access enforced using NTFS and Share Permissions | ✔️ |
-| Verified access restrictions via client workstation | ✔️ |
-
-**Next:** Configure DHCP for dynamic IP assignment, validate scope options, and test client address leasing (Milestone 06)
+The next milestone will focus on **Group Policy**, including workstation configuration, security settings, user experience settings, and domain-wide controls.
 
 ---
 
-##  Documentation and Portfolio Value
+## Notes
 
-Each milestone includes:
-
-- Purpose and real-world relevance  
-- Step-by-step configuration  
-- Screenshots from ADUC, DNS, Server Manager, PowerShell, or Client Login  
-- Command-line validation and identity tests  
-- Troubleshooting notes when applicable  
-- Screenshot and description-based verification  
-
-
----
-
-> _"This project is built incrementally. Every completed milestone serves as evidence of practical IT administration skills — not just theory, but actual implementation."_
-
----
+This README is intentionally simple.  
+Most of the detail lives in the milestone documentation files.  
+As milestones are completed, the table above can be updated as needed.
 
