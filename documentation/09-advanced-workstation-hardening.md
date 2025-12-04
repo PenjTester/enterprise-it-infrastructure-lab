@@ -290,8 +290,8 @@ On **LAB-CLIENT01** (logged in as `LAB\Administrator`):
 
 3. If prompted to restart, allow the workstation to reboot.
 
-Screenshot 11 – gpupdate /force completing successfully  
-![PLACEHOLDER](path-to-screenshot)
+*Screenshot – gpupdate /force completing successfully*  
+<img width="608" height="116" alt="Screenshot 2025-12-03 163035" src="https://github.com/user-attachments/assets/b9adbb59-8a39-41b1-8b6a-b5ae698b9862" />
 
 ---
 
@@ -308,8 +308,8 @@ Confirm that the following appear under Computer Settings > Applied Group Policy
 - Baseline Workstation Policy
 - Default Domain Policy
 
-Screenshot 12 – gpresult output showing Advanced Workstation Hardening applied  
-![PLACEHOLDER](path-to-screenshot)
+*Screenshot – gpresult output showing Advanced Workstation Hardening applied*  
+<img width="979" height="846" alt="Screenshot 2025-12-03 164836" src="https://github.com/user-attachments/assets/a79b58bb-2097-4cc7-b365-4a9b60fa9926" />
 
 ---
 
@@ -320,8 +320,8 @@ Security Settings > Local Policies > Security Options
 
 Verify that NTLM and SMB settings match the GPO configuration (NTLMv2 required, 128-bit encryption required, SMB signing enabled).
 
-Screenshot 13 – Local Security Policy showing hardened NTLM/SMB values  
-![PLACEHOLDER](path-to-screenshot)
+*Screenshot – Local Security Policy showing hardened NTLM/SMB values*  
+<img width="1441" height="954" alt="Screenshot 2025-12-03 171407" src="https://github.com/user-attachments/assets/20cce926-746a-41e7-a617-6e1a2fe261a5" />
 
 ---
 
@@ -342,8 +342,8 @@ Applications and Services Logs > Microsoft > Windows > PowerShell > Operational
 
 Confirm new entries appear such as Event ID 4104.
 
-Screenshot 14 – PowerShell Operational log showing script block logging  
-![PLACEHOLDER](path-to-screenshot)
+*Screenshot – PowerShell Operational log showing script block logging*  
+<img width="634" height="152" alt="Screenshot 2025-12-03 173416" src="https://github.com/user-attachments/assets/00eec5e1-4bf0-492e-9f35-e887f409b6b8" />
 
 ---
 
@@ -355,8 +355,8 @@ ping lab-dc01
 
 Successful replies confirm outbound workstation-to-DC communication is intact.
 
-Screenshot 15 – LAB-CLIENT01 successfully pinging LAB-DC01  
-![PLACEHOLDER](path-to-screenshot)
+*Screenshot – LAB-CLIENT01 successfully pinging LAB-DC01*  
+<img width="613" height="218" alt="image" src="https://github.com/user-attachments/assets/8684f47f-7223-4833-a7aa-33b95a1e30a3" />
 
 ---
 
@@ -376,8 +376,8 @@ Expected result: 100% loss
 
 These failures confirm inbound SMB and ICMP are now blocked, and local accounts cannot be used for remote authentication.
 
-Screenshot 16 – net use or ping showing expected failure  
-![PLACEHOLDER](path-to-screenshot)
+*Screenshot – net use or ping showing expected failure*  
+<img width="793" height="126" alt="image" src="https://github.com/user-attachments/assets/cbb16e87-6bdc-40f5-895d-a2cfe3e23cbf" />
 
 ---
 
