@@ -34,33 +34,39 @@ Each milestone has its own detailed documentation file under `/documentation/`.
 | 05 – File Sharing & NTFS Permissions |  Completed | `/documentation/05-file-sharing-permissions-and-ntfs-management.md` |
 | 06 – DHCP Configuration (Dynamic IP Assignment) |  Completed | `/documentation/06-dhcp-configuration-dynamic-ip-assignment.md` |
 | 07 – DNS Management & Domain Service Reliability |  Completed | `/documentation/07-dns-management-and-domain-service-reliability.md` |
-| 08 – Group Policy Configuration & Workstation Management |  Upcoming | *(coming soon)* |
+| 08 – Workstation OU Structure & Baseline GPO Deployment |  Completed | `documentation/08-workstation-OU-structure-and-baseline-GPO-deployment.md` |
+| 09 – Advanced Workstation Hardening | Completed | `documentation/09-advanced-workstation-hardening.md` |
+| 10 – Domain Admin & Privileged Access Hardening | Upcoming |
 
 ---
 
 ## What This Project Covers
 
 - Installing and configuring a Windows Server domain controller  
-- AD DS, DNS, and DHCP setup  
-- Joining Windows clients to the domain  
-- Creating an OU structure  
-- Managing users, groups, and permissions  
-- NTFS and share permissions  
-- DNS forward lookup, reverse lookup, SRV records, and scavenging  
-- DHCP scopes, leases, and dynamic registration  
-- Troubleshooting using built-in tools (`ipconfig`, `nslookup`, `whoami`, etc.)  
-- Documenting each administrative task with screenshots  
-- Keeping configuration changes organized by milestone
+- Configuring Active Directory Domain Services (AD DS)  
+- Setting up DNS zones, records, scavenging, and domain service reliability  
+- Configuring DHCP scopes, leases, reservations, and dynamic DNS registration  
+- Joining Windows 10 clients to the domain  
+- Creating and structuring Organizational Units (OUs) for enterprise management  
+- Managing users, groups, roles, and access control with ADUC  
+- Implementing NTFS and SMB share permissions  
+- Deploying baseline Group Policy Objects (GPOs) for workstation configuration  
+- Enforcing security hardening via GPO (LAN Manager levels, SMB signing, NTLMv2 requirements)  
+- Restricting credential delegation (default, saved, and fresh credentials)  
+- Hardening local accounts, including blocking network logon for local users  
+- Enforcing LDAP signing and secure authentication flows  
+- Enabling enterprise-grade PowerShell visibility (script block logging, module logging, transcription)  
+- Restricting inbound and outbound NTLM traffic  
+- Implementing workstation hardening aligned with enterprise security principles  
+- Verifying security posture using GPResult, Local Security Policy, Event Viewer, NETLOGON tests, and SMB/ICMP behavior  
+- Documenting each configuration step with screenshots and organized milestone folders  
+- Maintaining clean, milestone-based configuration drift control throughout the project  
+
 
 The documentation folder contains the full walkthroughs.
 
 ---
 
-## Next Steps
-
-The next milestone will focus on **Group Policy**, including workstation configuration, security settings, user experience settings, and domain-wide controls.
-
----
 
 ## Notes
 
