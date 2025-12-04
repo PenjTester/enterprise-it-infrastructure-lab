@@ -1,0 +1,392 @@
+# 09 – Advanced Workstation Hardening
+
+**DATE:** 2025-12-03  
+**SERVER:** LAB-DC01 (Windows Server 2019)  
+**CLIENT:** LAB-CLIENT01 (Windows 10)
+
+---
+
+## Overview
+
+In this milestone, the lab environment moves beyond basic domain and workstation configuration into **real security hardening** for domain-joined clients.
+
+Instead of leaving LAB-CLIENT01 as a default Windows 10 box, this milestone introduces an **“Advanced Workstation Hardening”** Group Policy Object (GPO) targeted at the **Lab Workstations** Organizational Unit (OU). The goal is to make the workstation behave more like a locked-down enterprise endpoint:
+
+- Stronger NTLM settings and session security  
+- SMB signing enforced  
+- Local accounts restricted from network use  
+- PowerShell activity logged in detail  
+- Reduced avenues for credential abuse and lateral movement  
+
+By the end of this milestone, LAB-CLIENT01 is still usable for normal domain work, but much less friendly to attackers.
+
+---
+
+## Prerequisites
+
+This milestone assumes the following items are already in place:
+
+- A functional domain: **lab.local**
+- Domain controller: **LAB-DC01** (DNS + DHCP + AD DS configured in earlier milestones)
+- Domain-joined Windows 10 client: **LAB-CLIENT01**
+- OU structure already created (from earlier work), including:  
+  - `_Computers`  
+  - `_Workstations`  
+  - `Lab Workstations` (containing LAB-CLIENT01)
+- Previous baseline GPOs (e.g., **Baseline Workstation Policy**) already linked to the workstation OU
+
+---
+
+## Goals of This Milestone
+
+This milestone focuses on:
+
+- Creating and linking a **dedicated hardening GPO** for domain workstations  
+- Applying advanced security settings that affect NTLM, SMB, local accounts, and credential delegation  
+- Enabling PowerShell logging for better visibility  
+- Verifying that the policy settings are applied and that the workstation’s behavior has changed in measurable ways
+
+---
+
+## Phase 1 – Create and Link the “Advanced Workstation Hardening” GPO
+
+The first step is to create a dedicated GPO for advanced hardening and link it only where it’s intended: the **Lab Workstations** OU.
+
+### 1.1 – Open Group Policy Management and confirm OU structure
+
+In **Group Policy Management** on LAB-DC01:
+
+- Expand: `Forest: lab.local` → `Domains` → `lab.local`
+- Confirm the presence of:  
+  - `_Computers`  
+  - `_Workstations`  
+  - `Lab Workstations`  
+- Confirm that **LAB-CLIENT01** resides in the **Lab Workstations** OU.
+
+**Screenshot 1 – Group Policy Management showing lab.local → _Computers → _Workstations → Lab Workstations with LAB-CLIENT01 inside**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+### 1.2 – Create the “Advanced Workstation Hardening” GPO
+
+1. In **Group Policy Management**, right-click the **Lab Workstations** OU.  
+2. Select **Create a GPO in this domain, and Link it here…**  
+3. Name the GPO:  
+   **Advanced Workstation Hardening**  
+4. Leave **Source Starter GPO** as **(none)**.  
+5. Confirm that the GPO now appears under the Lab Workstations OU.
+
+**Screenshot 2 – New “Advanced Workstation Hardening” GPO shown under the Lab Workstations OU**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+### 1.3 – Confirm link properties
+
+1. Click on **Lab Workstations** in the left pane.  
+2. In the right pane, confirm:  
+   - **Link Enabled:** Yes  
+   - **GPO Status:** Enabled  
+3. Optionally verify that **Baseline Workstation Policy** is still linked and processed before/alongside the new GPO.
+
+**Screenshot 3 – Lab Workstations OU with Baseline Workstation Policy and Advanced Workstation Hardening linked**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+## Phase 2 – Core Network & Authentication Hardening (Computer Configuration)
+
+This phase focuses on the **Computer Configuration** section of the GPO, making changes that affect how the workstation participates in the network (NTLM, SMB, local accounts, etc.).
+
+> All settings in this phase are configured in:  
+> **Computer Configuration → Policies → Windows Settings → Security Settings**
+
+---
+
+### 2.1 – Enforce SMB Signing and LAN Manager Hardening
+
+In the **Advanced Workstation Hardening** GPO editor:
+
+1. Navigate to:  
+   `Computer Configuration → Policies → Windows Settings → Security Settings → Local Policies → Security Options`
+
+2. Configure the following settings:
+
+- **Microsoft network client: Digitally sign communications (always)**  
+  - Set to **Enabled**  
+  - Effect: The workstation always signs SMB client traffic.
+
+- **Microsoft network client: Digitally sign communications (if server agrees)**  
+  - Set to **Enabled** (if configured)  
+  - Effect: Will sign SMB traffic when supported by the server.
+
+- **Microsoft network server: Digitally sign communications (always)**  
+  - Set to **Enabled**  
+  - Effect: The workstation, acting as server, requires signed SMB connections.
+
+- **Network security: LAN Manager authentication level**  
+  - Set to **Send NTLMv2 response only. Refuse LM & NTLM**  
+  - Effect: Legacy LM and NTLMv1 are refused; only NTLMv2 is allowed.
+
+**Screenshot 4 – Security Options view showing SMB signing and LAN Manager authentication level configured**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+### 2.2 – Harden NTLM Session Security
+
+In the same **Security Options** view:
+
+- **Network security: Minimum session security for NTLM SSP based (including secure RPC) clients**  
+  - Set to **Enabled**  
+  - Options checked:  
+    - **Require NTLMv2 session security**  
+    - **Require 128-bit encryption**
+
+- **Network security: Minimum session security for NTLM SSP based (including secure RPC) servers**  
+  - Set similarly to require NTLMv2 and 128-bit encryption (if configured).
+
+This ensures both client and server components enforce strong session security for NTLM traffic.
+
+**Screenshot 5 – Security Options properties for “Minimum session security for NTLM SSP (clients)” showing NTLMv2 + 128-bit encryption required**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+### 2.3 – Restrict Local Accounts from Network Use
+
+Next, restrict local accounts so they cannot be used for remote network logons.
+
+Navigate to:
+
+`Computer Configuration → Policies → Windows Settings → Security Settings → Local Policies → User Rights Assignment`
+
+Configure:
+
+- **Deny access to this computer from the network**  
+  - Check **Define these policy settings**  
+  - Add:  
+    - **LOCAL ACCOUNT**  
+    - **LOCAL ACCOUNT AND MEMBER OF ADMINISTRATORS GROUP**  
+  - Effect: Local accounts (including the local Administrator) cannot be used over the network.
+
+**Screenshot 6 – User Rights Assignment for “Deny access to this computer from the network” showing LOCAL ACCOUNT and LOCAL ACCOUNT AND MEMBER OF ADMINISTRATORS GROUP**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+## Phase 3 – Credential Delegation & PowerShell Logging
+
+This phase focuses on reducing credential exposure and increasing visibility into PowerShell activity.
+
+---
+
+### 3.1 – Deny Delegation of Credentials
+
+Navigate to:
+
+`Computer Configuration → Policies → Administrative Templates → System → Credentials Delegation`
+
+Configure:
+
+- **Deny delegating default credentials**  
+  - Set to **Enabled**  
+  - Click **Show…** and add:  
+    - `*`  
+  - Effect: Prevents default credentials from being delegated to remote servers.
+
+- **Deny delegating saved credentials**  
+  - Set to **Enabled**  
+  - Click **Show…** and add:  
+    - `*`  
+  - Effect: Prevents saved credentials from being delegated.
+
+These settings reduce the risk of credentials being silently reused across systems.
+
+**Screenshot 7 – “Deny delegating default credentials” and “Deny delegating saved credentials” configured with a wildcard entry**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+### 3.2 – Disable Windows Error Reporting (Optional Hardening)
+
+Navigate to:
+
+`Computer Configuration → Policies → Administrative Templates → Windows Components → Windows Error Reporting`
+
+Configure:
+
+- **Disable Windows Error Reporting**  
+  - Set to **Enabled**  
+  - Effect: Prevents sending error data to Microsoft, reducing information leakage.
+
+**Screenshot 8 – “Disable Windows Error Reporting” policy enabled**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+### 3.3 – Enable PowerShell Script Block and Module Logging
+
+Navigate to:
+
+`Computer Configuration → Policies → Administrative Templates → Windows Components → Windows PowerShell`
+
+Configure:
+
+- **Turn on PowerShell Script Block Logging**  
+  - Set to **Enabled**  
+  - Effect: Logs evaluated PowerShell script blocks to the event log.
+
+- **Turn on PowerShell Module Logging**  
+  - Set to **Enabled**  
+  - Click **Show…** and add appropriate module patterns (e.g. `Microsoft.PowerShell.*`).  
+  - Effect: Logs PowerShell module usage for specified modules.
+
+These settings cause detailed PowerShell activity to be written into the **PowerShell Operational** event log.
+
+**Screenshot 9 – Windows PowerShell policy node showing Script Block Logging and Module Logging enabled**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+**Screenshot 10 – Module Logging “Show Contents” dialog with a wildcard entry (e.g., Microsoft.PowerShell.*)**  
+`![PLACEHOLDER](path-to-screenshot)`
+
+---
+
+## Phase 4 – Confirm GPO Application on LAB-CLIENT01
+
+With the GPO configured, the next step is to confirm that LAB-CLIENT01 is actually receiving and applying the Advanced Workstation Hardening policies.
+
+---
+
+### 4.1 – Force Group Policy Update and Reboot
+
+On **LAB-CLIENT01** (logged in as `LAB\Administrator`):
+
+1. Open **Command Prompt** as Administrator.  
+2. Run:  
+   ```bash
+   gpupdate /force
+
+3. If prompted to restart, allow the workstation to reboot.
+
+Screenshot 11 – gpupdate /force completing successfully  
+![PLACEHOLDER](path-to-screenshot)
+
+---
+
+### 4.2 – Verify GPOs via gpresult /r
+
+On LAB-CLIENT01:
+
+Run the following in an elevated command prompt:
+
+gpresult /r
+
+Confirm that the following appear under Computer Settings > Applied Group Policy Objects:
+- Advanced Workstation Hardening
+- Baseline Workstation Policy
+- Default Domain Policy
+
+Screenshot 12 – gpresult output showing Advanced Workstation Hardening applied  
+![PLACEHOLDER](path-to-screenshot)
+
+---
+
+### 4.3 – Spot-check NTLM and SMB Settings in Local Security Policy
+
+Open secpol.msc and navigate to:
+Security Settings > Local Policies > Security Options
+
+Verify that NTLM and SMB settings match the GPO configuration (NTLMv2 required, 128-bit encryption required, SMB signing enabled).
+
+Screenshot 13 – Local Security Policy showing hardened NTLM/SMB values  
+![PLACEHOLDER](path-to-screenshot)
+
+---
+
+## Phase 5 – Behavioral Verification
+
+These tests confirm that the workstation behaves differently as a result of the hardening.
+
+---
+
+### 5.1 – Verify PowerShell Logging in Event Viewer
+
+On LAB-CLIENT01:
+
+Run any PowerShell command (example: Get-Process | Select-Object -First 5)
+
+Open Event Viewer:
+Applications and Services Logs > Microsoft > Windows > PowerShell > Operational
+
+Confirm new entries appear such as Event ID 4104.
+
+Screenshot 14 – PowerShell Operational log showing script block logging  
+![PLACEHOLDER](path-to-screenshot)
+
+---
+
+### 5.2 – Validate Outbound Communication Still Works
+
+From LAB-CLIENT01, run:
+
+ping lab-dc01
+
+Successful replies confirm outbound workstation-to-DC communication is intact.
+
+Screenshot 15 – LAB-CLIENT01 successfully pinging LAB-DC01  
+![PLACEHOLDER](path-to-screenshot)
+
+---
+
+### 5.3 – Validate Inbound Restrictions (Expected Behavior)
+
+From LAB-DC01:
+
+Attempt an SMB connection:
+
+net use \\lab-client01\c$ /user:lab-client01\administrator *
+
+Expected result:
+System error 67 – The network name cannot be found
+
+Attempt to ping LAB-CLIENT01:
+Expected result: 100% loss
+
+These failures confirm inbound SMB and ICMP are now blocked, and local accounts cannot be used for remote authentication.
+
+Screenshot 16 – net use or ping showing expected failure  
+![PLACEHOLDER](path-to-screenshot)
+
+---
+
+## Summary
+
+Milestone 09 successfully hardened LAB-CLIENT01:
+
+- SMB signing enforced  
+- NTLM restricted to NTLMv2 with 128-bit encryption  
+- Local accounts denied network logon  
+- Credential delegation blocked  
+- PowerShell logging enabled (script block and module logging)  
+- Outbound communication still functional  
+- Inbound SMB/ICMP appropriately restricted  
+
+The workstation now behaves like a hardened enterprise endpoint.
+
+---
+
+## What’s Next?
+
+Milestone 10 – Domain Admin & Privileged Access Hardening
+
+Next steps include:
+
+- Reviewing privileged groups
+- Hardening administrative account usage
+- Reducing lateral movement opportunities
+- Continuing toward an enterprise-tier security model
+
+---
+
