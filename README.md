@@ -63,7 +63,7 @@ Each milestone has its own detailed documentation file under `/documentation/`.
 - Maintaining clean, milestone-based configuration drift control throughout the project  
 
 
-The documentation folder contains the full walkthroughs.
+*The documentation folder contains the full walkthroughs.*
 
 ---
 
