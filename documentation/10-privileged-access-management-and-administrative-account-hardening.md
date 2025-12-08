@@ -28,8 +28,10 @@ On `LAB-DC01`, open **Active Directory Users and Computers** and confirm:
 - Under `_IT_Admins`, confirm your dedicated privileged account exists:
   - `lab-admin`
 
-> **Screenshot Placeholder M10-01:** ADUC top-level OU structure showing `_IT_Admins`, `_Users`, `_Groups`, `_Computers`.  
-> **Screenshot Placeholder M10-02:** ADUC focused on `_IT_Admins` with `lab-admin` visible.
+*Screenshot: ADUC top-level OU structure showing `_IT_Admins`, `_Users`, `_Groups`, `_Computers`;ADUC focused on `_IT_Admins` with `lab-admin` visible*
+  
+<img width="1191" height="796" alt="Screenshot 2025-12-08 133926" src="https://github.com/user-attachments/assets/647b2916-c878-4d4f-a201-7d3530d5bc67" />
+   
 
 ---
 
@@ -47,7 +49,9 @@ Verify that:
 
 - `LAB-CLIENT01` is located under `Lab Workstations`.
 
-> **Screenshot Placeholder M10-03:** ADUC showing `LAB-CLIENT01` inside `_Computers → _Workstations → Lab Workstations`.
+ *Screenshot: ADUC showing `LAB-CLIENT01` inside `_Computers → _Workstations → Lab Workstations`.*
+<img width="1184" height="232" alt="Screenshot 2025-12-08 145036" src="https://github.com/user-attachments/assets/a38df667-6f65-4fd0-9a20-5db0aa058433" />
+
 
 This OU is the scope where workstation-targeted hardening GPOs will apply.
 
@@ -71,7 +75,9 @@ On `LAB-DC01`:
 
    `Privileged Access – Block Domain Admin Logon`
 
-> **Screenshot Placeholder M10-04:** GPMC showing the GPO “Privileged Access – Block Domain Admin Logon” linked to `Lab Workstations`.
+*Screenshot: GPM showing the GPO “Privileged Access – Block Domain Admin Logon” linked to `Lab Workstations`.*
+<img width="1248" height="472" alt="image" src="https://github.com/user-attachments/assets/b5428eb6-f4e5-4c47-a4d3-1d6bb27e11e6" />
+
 
 ---
 
@@ -99,7 +105,9 @@ Edit the new GPO:
 
 4. Apply and close the dialog.
 
-> **Screenshot Placeholder M10-05:** GPO editor showing “Deny log on locally” populated with `Domain Admins`, `lab-admin`, and (optionally) `Administrator`.
+*Screenshot: GPO editor showing “Deny log on locally” populated with `Domain Admins`, `lab-admin`, and (optionally) `Administrator`.*
+<img width="1339" height="833" alt="Screenshot 2025-12-08 171959" src="https://github.com/user-attachments/assets/4e1bc63e-9900-4e14-aeb5-e9649975c32a" />
+
 
 This prevents privileged accounts from logging on interactively at the workstation console.
 
@@ -127,7 +135,9 @@ In the same GPO (`Privileged Access – Block Domain Admin Logon`):
      - `lab-admin`
      - `Administrator` (optional but recommended)
 
-> **Screenshot Placeholder M10-06:** GPO editor showing “Deny log on through Remote Desktop Services” with the same privileged identities listed.
+*Screenshot: GPO editor showing “Deny log on through Remote Desktop Services” with the same privileged identities listed.*
+<img width="1339" height="831" alt="Screenshot 2025-12-08 172007" src="https://github.com/user-attachments/assets/2f6a43fb-b2f7-4b40-9c57-8e9f27a40bb6" />
+
 
 This prevents privileged accounts from using RDP to log into workstations.
 
@@ -146,7 +156,9 @@ Still in the same GPO and same node (**User Rights Assignment**):
      - `Local account`
      - `Local account and member of Administrators group`
 
-> **Screenshot Placeholder M10-07:** GPO editor showing “Deny access to this computer from the network” populated with `Local account` and `Local account and member of Administrators group`.
+*Screenshot: GPO editor showing “Deny access to this computer from the network” populated with `Local account` and `Local account and member of Administrators group`.*
+<img width="1339" height="404" alt="image" src="https://github.com/user-attachments/assets/9a2537d1-ca56-47c7-8933-13e9e4addf27" />
+
 
 This reduces lateral movement risk by preventing local Administrator–type accounts from being used for network logon.
 
@@ -164,7 +176,6 @@ On `LAB-CLIENT01`:
 
 1. Restart the workstation to ensure computer-side policy is fully applied.
 
-No screenshots are strictly required here, but you can capture the gpupdate output if desired.
 
 ---
 
@@ -179,8 +190,12 @@ After the reboot of `LAB-CLIENT01`:
    - Network access is functional (e.g., open Command Prompt and ping `LAB-DC01` and `lab.local`).
    - Access to the user’s departmental share still works via the UNC path you configured in earlier milestones (for example, the department-specific share for jmiller).
 
-> **Screenshot Placeholder M10-08:** `LAB-CLIENT01` logged in as `jmiller`, with a command prompt showing successful pings to `LAB-DC01` and `lab.local`.  
-> **Screenshot Placeholder M10-09:** File Explorer on `LAB-CLIENT01` showing successful access to the appropriate departmental share for that user.
+*Screenshot: `LAB-CLIENT01` logged in as `jmiller`, with a command prompt showing successful pings to `LAB-DC01` and `lab.local`.*
+<img width="567" height="417" alt="image" src="https://github.com/user-attachments/assets/cc417128-3861-40d9-abe6-ba899a161b19" />
+ 
+ *Screenshot: File Explorer on `LAB-CLIENT01` showing successful access to the "management" share for jmiller.*
+ <img width="1120" height="434" alt="image" src="https://github.com/user-attachments/assets/38cf63ea-9e0d-4401-a8f2-daba952a959c" />
+
 
 This confirms that standard user workflows are not broken by the new restrictions.
 
@@ -207,7 +222,11 @@ Optionally, repeat the test with:
 - `Administrator` (domain or local, depending on configuration)
 - Any other privileged identity added to the deny lists above.
 
-> **Screenshot Placeholder M10-10:** `LAB-CLIENT01` showing the logon failure screen for `lab-admin`, with a message indicating that the sign-in is not allowed.
+*Screenshot: `LAB-CLIENT01` showing the logon failure screen for `lab-admin`, with a message indicating that the sign-in is not allowed.*
+<img width="856" height="542" alt="Screenshot 2025-12-08 135611" src="https://github.com/user-attachments/assets/104af088-6444-432d-a6f2-00f989c791da" />
+
+
+
 
 Because the restriction is enforced locally via “Deny log on locally” and “Deny log on through Remote Desktop Services”, the workstation can block these logons before any full domain authentication occurs. As a result, the domain controller may not log a 4625 failed logon event for these specific denied workstation logons. This is expected given this hardening approach; behavioral evidence at the client (failed logon with “not allowed” message) is the primary validation.
 
@@ -223,7 +242,6 @@ At the end of Milestone 10:
   - Deny local logon for:
     - `Domain Admins`
     - `lab-admin`
-    - `Administrator` (if configured)
   - Deny Remote Desktop logon for the same privileged identities.
   - Deny network access from:
     - `Local account`
