@@ -1,5 +1,10 @@
 # Milestone 12 — Privileged Break-Glass Access for Hardened Workstations
 
+**Date:** 2025-12-11  
+**Server:** LAB-DC01 (Windows Server 2019)  
+**Client:** LAB-CLIENT01 (Windows 10 Enterprise, domain-joined) 
+
+
 ## 12.1 Overview and Purpose
 
 Milestone 12 introduces a controlled **break-glass administrative access model** for hardened workstations in the `lab.local` domain.  
@@ -64,11 +69,9 @@ A new controlled identity was created using **Active Directory Users and Compute
 
 This ensured the account started with no domain-wide privileged rights.
 
-**Screenshot Required — AuditAdmin group membership**
-
-- Tool: Active Directory Users and Computers (LAB-DC01)  
-- Path: `lab.local → _IT_Admins`  
-- Action: Right-click **Audit Admin** → **Properties** → **Member Of** tab  
+*Screenshot: AuditAdmin group membership*  
+<img width="1115" height="781" alt="image" src="https://github.com/user-attachments/assets/990e7536-132d-4126-b70e-23f776bad0e8" />
+ 
 - Expected: Only `Domain Users` is listed (no Domain Admins, no Enterprise Admins, etc.)
 
 ---
@@ -98,12 +101,9 @@ To provide workstation-only administrative capability, AuditAdmin needed to be a
 
 Result: Every workstation within the **Lab Workstations** OU automatically includes `LAB\auditadmin` as a member of the local **Administrators** group.
 
-**Screenshot Required — Local Administrators membership on LAB-CLIENT01**
+*Screenshot: Local Administrators membership on LAB-CLIENT01*  
+<img width="763" height="231" alt="image" src="https://github.com/user-attachments/assets/1907365c-9d1f-4f8d-96e5-31e5eaf2a5d7" />
 
-1. Log on to LAB-CLIENT01 as `LAB\auditadmin`.  
-2. Open an elevated Command Prompt (Run as administrator).  
-3. Run: `net localgroup administrators`  
-4. Capture the command output showing `LAB\auditadmin` listed as a member of the local Administrators group.
 
 ---
 
@@ -181,11 +181,10 @@ This verifies that:
 - The break-glass account sees the same hardened policy stack as any other user.  
 - All configuration is being delivered via GPO, not local one-off changes.
 
-**Screenshot Required — gpresult /r (Computer Settings)**
+*Screenshot: gpresult /r (Computer Settings)*  
+<img width="909" height="853" alt="Screenshot 2025-12-11 161757" src="https://github.com/user-attachments/assets/b6af777f-fe19-42ab-aba8-6942546aa4bf" />
 
-1. On LAB-CLIENT01 as `LAB\auditadmin`, in an elevated Command Prompt, run: `gpresult /r`  
-2. Scroll to the **COMPUTER SETTINGS** section.  
-3. Capture the portion that shows **Applied Group Policy Objects** listing the workstation GPOs above.
+
 
 ---
 
@@ -235,7 +234,7 @@ In all of these cases, the use of AuditAdmin is deliberate and controlled, consi
 
 ---
 
-## 12.6 Summary of Milestone 12 Accomplishments
+## Milestone 12 Summary
 
 Milestone 12 completed the following:
 
@@ -249,4 +248,3 @@ Milestone 12 completed the following:
   - `Default Domain Policy`
 - Established AuditAdmin as the standard account for workstation-level troubleshooting, patch validation, and future monitoring/backup milestones.
 
-**Milestone 12 — Privileged Break-Glass Access for Hardened Workstations — is complete and ready for portfolio publication.**
