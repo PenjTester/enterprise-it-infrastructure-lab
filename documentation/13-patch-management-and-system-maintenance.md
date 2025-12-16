@@ -167,7 +167,7 @@ This demonstrates role-based update strategy rather than blanket automation.
 
 ---
 
-## 13.7 Milestone Summary
+## Milestone 13 Summary
 
 Milestone 13 demonstrates controlled, policy-driven patch management without unnecessary complexity.
 
