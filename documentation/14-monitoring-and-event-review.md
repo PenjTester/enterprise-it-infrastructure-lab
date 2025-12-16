@@ -56,9 +56,9 @@ Modern Windows workstations generate multiple logon-related events per session d
 - Group Policy processing events are present, confirming that policy enforcement is visible and auditable.
 - No unexplained or repeated authentication failures were observed during normal operation.
 
-**Optional Screenshot (if included):**
-- *Location:* Event Viewer → Windows Logs → System (GroupPolicy-related entries visible)  
-- *Purpose:* Demonstrate visibility into policy application on the workstation.
+*Screenshot: System event log showing normal operating system and service activity.*  
+<img width="1878" height="1181" alt="image" src="https://github.com/user-attachments/assets/f2e6cdf2-463b-48bb-88c1-1b13eab3cab4" />
+
 
 ---
 
@@ -80,9 +80,10 @@ Unlike workstations, Domain Controllers log authentication events in a centraliz
 - Domain authentication activity is centrally logged and reviewable.
 - Domain services appeared operational, with no indicators of identity service failure.
 
-**Optional Screenshot (if included):**
-- *Location:* Event Viewer → Windows Logs → Security on LAB-DC01  
-- *Purpose:* Show a successful domain authentication event with a human domain account.
+*Screenshot: Successful domain user logon recorded on the domain controller.*  
+<img width="1929" height="1143" alt="image" src="https://github.com/user-attachments/assets/609f13c6-3f88-47dd-8fab-226ef93bbfb9" />
+
+
 
 ---
 
