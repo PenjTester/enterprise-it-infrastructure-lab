@@ -121,7 +121,7 @@ These categories define what would require investigation in an operational envir
 
 ---
 
-## Conclusion
+## Milestone 14 Summary
 
 Milestone 14 confirms that the enterprise lab environment is **operationally observable** following hardening and patch management. Authentication activity, policy enforcement, and system health can be reviewed using native Windows tools on both workstations and the Domain Controller.
 
