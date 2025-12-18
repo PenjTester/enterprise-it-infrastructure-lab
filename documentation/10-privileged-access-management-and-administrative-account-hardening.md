@@ -232,7 +232,7 @@ Because the restriction is enforced locally via “Deny log on locally” and �
 
 ---
 
-## 10.10 – Milestone Completion Summary
+## Milestone Completion Summary
 
 At the end of Milestone 10:
 
