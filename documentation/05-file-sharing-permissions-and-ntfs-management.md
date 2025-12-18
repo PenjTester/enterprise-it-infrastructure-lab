@@ -130,7 +130,7 @@ Using real user accounts, we tested access from the **client workstation** to co
 
 ---
 
-## 6. Results Summary
+##  Results Summary
 
 | Verification Check | Result |
 |--------------------|--------|
