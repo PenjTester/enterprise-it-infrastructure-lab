@@ -173,7 +173,7 @@ ipconfig /displaydns
 
 ---
 
-#  FINAL RESULTS – MILESTONE 07 COMPLETE
+#  Milestone Results
 
 DNS is now:
 
