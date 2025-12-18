@@ -39,10 +39,10 @@ Each milestone has its own detailed documentation file under `/documentation/`.
 | 10 – Domain Admin & Privileged Access Hardening | Completed | `/documentation/10-privileged-access-management-and-administrative-account-hardening.md` |
 | 11 – User Lifecycle & Access Operations | Completed | `/documentation/11-user-lifecycle-and-access-operations.md` |
 | 12 – Break-Glass Access for Hardened Workstations | Completed | `/documentation/12-break-glass-access-for-hardened-workstations.md` |
-| 13 – Patch Management & System Maintenance | Upcoming | `/documentation/13-patch-management-and-system-maintenance.md` |
-| 14 – Monitoring & Event Review | Upcoming | `/documentation/14-monitoring-and-event-review.md` |
-| 15 – Backup & Recovery Procedures | Upcoming | `/documentation/15-backup-and-recovery-procedures.md` |
-| 16 – Enterprise Administration Capstone & Final Documentation | Upcoming | `/documentation/16-enterprise-administration-capstone-and-final-documentation.md` |
+| 13 – Patch Management & System Maintenance | Completed | `/documentation/13-patch-management-and-system-maintenance.md` |
+| 14 – Monitoring & Event Review | Completed | `/documentation/14-monitoring-and-event-review.md` |
+| 15 – Backup & Recovery Procedures | Completed | `/documentation/15-backup-and-recovery-procedures.md` |
+| 16 – Enterprise Administration Capstone & Final Documentation | Completed | `/documentation/16-enterprise-administration-capstone-and-final-documentation.md` |
 
 ---
 
