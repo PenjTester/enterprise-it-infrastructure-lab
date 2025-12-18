@@ -230,7 +230,7 @@ This ensures:
 
 ---
 
-# 6. Results Summary
+# Results Summary
 
 | Verification Step | Result |
 |-------------------|--------|
