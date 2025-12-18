@@ -1,9 +1,11 @@
 # Enterprise Windows Infrastructure Lab (VirtualBox)
 
-This repository contains a small virtual enterprise environment built in Oracle VirtualBox.  
-The goal is to set up a realistic Windows domain with a domain controller, DNS, DHCP, Active Directory structure, and a Windows 10 client. Each milestone focuses on a common administrative task, with step-by-step documentation and screenshots stored in the `documentation` folder.
+This repository contains a fully documented Windows enterprise-style lab built in Oracle VirtualBox.
 
-This project is meant to be practical: build the environment, configure the services, and verify that everything works. The documentation reflects what was done, why it was done, and how it behaves.
+The environment simulates a small Active Directory domain, including a domain controller providing DNS and DHCP services, an organized Active Directory structure, and a Windows 10 domain-joined workstation. Each milestone represents a common administrative responsibility and is documented step by step with validation and screenshots.
+
+The project emphasizes practical enterprise administration: centralized identity management, policy-driven configuration, security hardening, monitoring, and recovery. The documentation focuses on what was configured, why each decision was made, and how the environment behaves under real administrative constraints.
+
 
 ---
 
@@ -17,7 +19,14 @@ This project is meant to be practical: build the environment, configure the serv
 | Workstation | Windows 10 Pro (Domain-joined client) |
 | Network Mode | Internal Network (`lab-network`) |
 
-The lab runs fully isolated inside VirtualBox and is used for practicing common enterprise administration skills.
+The lab runs fully isolated inside VirtualBox and is designed to model common enterprise administration workflows rather than ad-hoc configuration.
+
+---
+
+## Network Diagram
+
+<img width="1536" height="1024" alt="labdiagram" src="https://github.com/user-attachments/assets/184c74dc-6057-47ec-bbde-a8931cdfbd18" />
+
 
 ---
 
@@ -49,34 +58,26 @@ Each milestone has its own detailed documentation file under `/documentation/`.
 ## What This Project Covers
 
 - Installing and configuring a Windows Server domain controller  
-- Configuring Active Directory Domain Services (AD DS)  
-- Setting up DNS zones, records, scavenging, and domain service reliability  
-- Configuring DHCP scopes, leases, reservations, and dynamic DNS registration  
-- Joining Windows 10 clients to the domain  
-- Creating and structuring Organizational Units (OUs) for enterprise management  
-- Managing users, groups, roles, and access control with ADUC  
-- Implementing NTFS and SMB share permissions  
-- Deploying baseline Group Policy Objects (GPOs) for workstation configuration  
-- Enforcing security hardening via GPO (LAN Manager levels, SMB signing, NTLMv2 requirements)  
-- Restricting credential delegation (default, saved, and fresh credentials)  
-- Hardening local accounts, including blocking network logon for local users  
-- Enforcing LDAP signing and secure authentication flows  
-- Enabling enterprise-grade PowerShell visibility (script block logging, module logging, transcription)  
-- Restricting inbound and outbound NTLM traffic  
-- Implementing workstation hardening aligned with enterprise security principles  
-- Verifying security posture using GPResult, Local Security Policy, Event Viewer, NETLOGON tests, and SMB/ICMP behavior  
-- Documenting each configuration step with screenshots and organized milestone folders  
-- Maintaining clean, milestone-based configuration drift control throughout the project  
+- Implementing Active Directory Domain Services (AD DS) as a centralized identity authority  
+- Configuring DNS zones, records, scavenging, and domain service reliability  
+- Deploying DHCP scopes, leases, reservations, and dynamic DNS registration  
+- Joining and managing Windows 10 domain clients  
+- Designing Organizational Unit (OU) structures aligned with administrative intent  
+- Managing users, groups, and role-based access control using ADUC  
+- Implementing NTFS and SMB share permissions with layered security models  
+- Deploying baseline and advanced Group Policy Objects (GPOs)  
+- Enforcing workstation hardening and credential protection via policy  
+- Restricting administrative access and implementing privileged access separation  
+- Enabling PowerShell logging, script block auditing, and command visibility  
+- Monitoring authentication, policy processing, and system behavior via Event Viewer  
+- Validating patch management behavior and update governance  
+- Implementing and verifying backup and recovery procedures  
+- Maintaining milestone-based documentation and configuration drift awareness  
 
-
-*The documentation folder contains the full walkthroughs.*
+*The documentation folder contains full walkthroughs for each milestone.*
 
 ---
 
 
-## Notes
 
-This README is intentionally simple.  
-Most of the detail lives in the milestone documentation files.  
-As milestones are completed, the table above can be updated as needed.
 
